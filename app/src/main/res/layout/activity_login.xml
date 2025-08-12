@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#070077">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="300dp"
+            android:layout_height="260dp"
+            android:layout_marginTop="120dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/ic_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="32dp"
+            android:autofillHints=""
+            android:background="@drawable/bg_text"
+            android:hint="@string/username"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColorHint="#ffffff"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logo_image" />
+
+        <ImageView
+            android:id="@+id/ic_user"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_user"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintEnd_toEndOf="@id/username"
+            app:layout_constraintTop_toTopOf="@+id/username"
+            app:layout_constraintBottom_toBottomOf="@id/username"
+            app:layout_constraintHorizontal_bias="1"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/loginBtn"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="10dp"
+            app:cornerRadius="20dp"
+            android:backgroundTint="#ffffff"
+            android:text="@string/log_in"
+            android:textColor="#070077"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/username"/>
+
+        <ImageView
+            android:id="@+id/imgAward"
+            android:layout_width="330dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="50dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/award"
+            android:scaleType="centerCrop"
+            android:src="@drawable/award"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

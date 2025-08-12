@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/greeting_banner"
+        android:layout_width="280dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_biru_greet_left"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/data_user"
+        app:layout_constraintEnd_toStartOf="@id/logout_banner">
+
+        <ImageView
+            android:id="@+id/ic_user"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_user"
+            app:layout_constraintBottom_toBottomOf="@+id/greeting_banner"
+            app:layout_constraintEnd_toEndOf="@+id/separator_greeting"
+            app:layout_constraintStart_toStartOf="@+id/greeting_banner"
+            app:layout_constraintTop_toTopOf="@+id/greeting_banner"/>
+
+        <TextView
+            android:id="@+id/separator_greeting"
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/ic_user"
+            app:layout_constraintEnd_toStartOf="@id/greetingText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/greetingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/selamat_datang"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/separator_greeting"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logout_banner"
+        android:layout_width="80dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_biru_greet_right"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/data_user">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logoutBtn"
+            android:layout_width="38dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_logout"
+            app:backgroundTint="@null"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/logout_banner"
+            app:layout_constraintEnd_toEndOf="@+id/logout_banner"
+            app:layout_constraintStart_toStartOf="@+id/logout_banner"
+            app:layout_constraintTop_toTopOf="@+id/logout_banner"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/data_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/data_user"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/main_card"
+        app:layout_constraintStart_toStartOf="@id/main_card" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_card"
+        android:layout_width="360dp"
+        android:layout_height="240dp"
+        android:background="@drawable/bg_biru_card"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/greeting_banner"
+        app:layout_constraintVertical_bias="0.15">
+
+        <ImageView
+            android:id="@+id/ic_location"
+            android:layout_width="130dp"
+            android:layout_height="170dp"
+            android:layout_marginStart="14dp"
+            android:importantForAccessibility="no"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_location" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/groupLatitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintStart_toEndOf="@id/ic_location"
+            app:layout_constraintTop_toTopOf="@id/ic_location">
+
+            <TextView
+                android:id="@+id/labelLatitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/latitude"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/valueLatitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/nilai_la"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/labelLatitude"
+                app:layout_constraintTop_toBottomOf="@id/labelLatitude" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/groupLongitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@id/groupLatitude"
+            app:layout_constraintTop_toBottomOf="@id/groupLatitude">
+
+            <TextView
+                android:id="@+id/labelLongitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/longitude"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/valueLongitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/nilai_lo"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/labelLongitude"
+                app:layout_constraintTop_toBottomOf="@id/labelLongitude" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/akurasiBtn"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="0dp"
+            android:background="@drawable/btn_biru"
+            android:backgroundTint="@null"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp"
+            android:text="@string/akurasi"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            app:backgroundTintMode="src_in"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_akurasi"
+            app:iconGravity="textEnd"
+            app:iconPadding="8dp"
+            app:iconSize="24dp"
+            app:iconTint="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ic_location"
+            app:layout_constraintTop_toBottomOf="@+id/groupLongitude"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <ImageView
+            android:id="@+id/indicatorKonfirmasi"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/indikator"
+            android:contentDescription="@string/indikator"
+            app:layout_constraintTop_toTopOf="@id/ic_location"
+            app:layout_constraintBottom_toBottomOf="@id/ic_location"
+            app:layout_constraintStart_toStartOf="@id/ic_location"
+            app:layout_constraintEnd_toEndOf="@id/ic_location"
+            app:layout_constraintVertical_bias="0.35"
+            app:layout_constraintHorizontal_bias="0.525"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/emergencyBtn"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_merah"
+        android:text="@string/emergency"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:cornerRadius="20dp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_card"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/cancelemer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/batalkan_emergency"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/white_cancel"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/emergencyBtn"
+        app:layout_constraintEnd_toEndOf="@id/emergencyBtn"
+        app:layout_constraintTop_toBottomOf="@id/emergencyBtn">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/imgAward"
+        android:layout_width="330dp"
+        android:layout_height="160dp"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/award"
+        android:scaleType="centerCrop"
+        android:src="@drawable/award"
+        app:layout_constraintTop_toBottomOf="@id/cancelemer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_biru_card"
+        android:padding="20dp"
+        android:elevation="6dp"
+        android:layout_gravity="center"
+        android:clipToPadding="false"
+        android:layout_margin="16dp"
+        android:backgroundTintMode="src_over">
+
+        <TextView
+            android:id="@+id/dialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/deskripsi_bahaya"
+            android:paddingBottom="8dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"/>
+
+        <EditText
+            android:id="@+id/editTextEmrDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_emr_desc"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:textColorHint="#BBBBBB"
+            android:background="@android:drawable/edit_text"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_biru"
+                android:text="@string/emr_desc_batal"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif" />
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/btnOk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_biru"
+                android:text="@string/emr_desc_ok"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

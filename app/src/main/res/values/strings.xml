@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TRC Pantau</string>
+    <string name="selamat_datang">Selamat Datang</string>
+    <string name="data_user">DATA USER</string>
+    <string name="akurasi">AKURASI</string>
+    <string name="latitude">LATITUDE :</string>
+    <string name="nilai_la">0.00</string>
+    <string name="longitude">LONGITUDE :</string>
+    <string name="nilai_lo">0.00</string>
+    <string name="username">username</string>
+    <string name="logo">logo</string>
+    <string name="log_in">Log In</string>
+    <string name="emergency">EMERGENCY</string>
+    <string name="award">award</string>
+
+    <string name="welcome_format">Selamat datang, %1$s</string>
+    <string name="latitude_format">Latitude: %1$.5f</string>
+    <string name="longitude_format">Longitude: %1$.5f</string>
+    <string name="permission_required">Izin lokasi diperlukan</string>
+    <string name="permission_denied">Izin lokasi ditolak</string>
+    <string name="location_failed">Gagal mendapatkan lokasi</string>
+    <string name="accurate_location_format">Lokasi akurat: %1$.5f, %2$.5f</string>
+    <string name="update_failed">Gagal mengupdate lokasi</string>
+    <string name="error_format">Error: %1$s</string>
+    <string name="emergency_failed">Gagal mengirim sinyal darurat</string>
+
+    <string name="connection_failed">Koneksi gagal. Periksa jaringan Anda.</string>
+    <string name="accurate_location">Lokasi akurat:\nLat: %1$.6f\nLon: %2$.6f</string>
+    <string name="emergency_sent">Sinyal darurat berhasil dikirim!</string>
+    <string name="confirmed">Terkonfirmasi</string>
+    <string name="not_confirmed">Belum dikonfirmasi</string>
+    <string name="status_check_failed">Gagal memeriksa status konfirmasi.</string>
+    <string name="monitoring">MONITORING</string>
+    <string name="link_maps">LINK MAPS</string>
+    <string name="whatsapp">WHATSAPP</string>
+    <string name="konfirmasi">KONFIRMASI</string>
+    <string name="sinyal_darurat_sudah_dikonfirmasi">Sinyal darurat sudah dikonfirmasi</string>
+    <string name="sinyal_darurat_belum_dikonfirmasi">Sinyal darurat belum dikonfirmasi</string>
+    <string name="status_tidak_diketahui">Status tidak diketahui</string>
+    <string name="indikator">indikator</string>
+    <string name="batalkan_emergency">BATALKAN EMERGENCY</string>
+
+    <string name="status_dibatalkan">Sinyal darurat dibatalkan</string>
+    <string name="emergency_canceled">Sinyal darurat berhasil dibatalkan</string>
+    <string name="tidak_ada_sinyal_darurat">Tidak ada sinyal darurat</string>
+
+    <string name="greeting">Selamat datang, %1$s</string>
+    <string name="akurasi_requested">Permintaan akurasi dikirim</string>
+    <string name="logged_out">Anda telah logout</string>
+    <string name="status_check_failed_server">Gagal memeriksa status konfirmasi (server)</string>
+    <string name="status_check_failed_empty">Gagal memeriksa status konfirmasi (response kosong)</string>
+    <string name="status_check_failed_network">Gagal memeriksa status konfirmasi (koneksi)</string>
+    <string name="emergency_sent_toast">Emergency dikirimkan</string>
+    <string name="emergency_cancelled_toast">Emergency dibatalkan</string>
+    <string name="emergency_failed_server">Gagal mengirim emergency (server)</string>
+    <string name="emergency_failed_network">Gagal mengirim emergency (koneksi)</string>
+    <string name="deskripsi_bahaya">Deskripsikan bahaya:</string>
+    <string name="hint_emr_desc">Contoh: Kebakaran di lokasi...</string>
+    <string name="emr_desc_batal">BATAL</string>
+    <string name="emr_desc_ok">OK</string>
+
+</resources>
