@@ -56,7 +56,7 @@
     <string name="emergency_failed_server">Gagal mengirim emergency (server)</string>
     <string name="emergency_failed_network">Gagal mengirim emergency (koneksi)</string>
     <string name="deskripsi_bahaya">Deskripsikan bahaya:</string>
-    <string name="hint_emr_desc">Contoh: Kebakaran di lokasi...</string>
+    <string name="hint_emr_desc">Contoh: Kebakaran di lokasi…</string>
     <string name="emr_desc_batal">BATAL</string>
     <string name="emr_desc_ok">OK</string>
 
