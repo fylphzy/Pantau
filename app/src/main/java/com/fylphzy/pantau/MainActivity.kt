@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     private var username: String = ""
 
     private val handler = Handler(Looper.getMainLooper())
-    private val pollingIntervalMillis = 15_000L
+    private val pollingIntervalMillis = 3_000L
     private var pollingRunnable: Runnable? = null
 
     private var confResetInProgress = false
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         private const val PREFS_NAME = "trc_prefs"
         private const val KEY_RUNNING = "location_service_running"
         private const val KEY_LAST_HEARTBEAT = "location_service_last_heartbeat"
-        private const val HEARTBEAT_TIMEOUT_MS = 15_000L
+        private const val HEARTBEAT_TIMEOUT_MS = 3_000L
 
         // Keys shared with LocationForegroundService
         private const val KEY_EMR_ACTIVE = "emr_active"
