@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -62,6 +63,13 @@ class MainActivity : AppCompatActivity() {
         private const val KEY_RUNNING = "location_service_running"
         private const val KEY_LAST_HEARTBEAT = "location_service_last_heartbeat"
         private const val HEARTBEAT_TIMEOUT_MS = 15_000L
+
+        // Keys shared with LocationForegroundService
+        private const val KEY_EMR_ACTIVE = "emr_active"
+        private const val KEY_LAST_EMR_DESC = "last_emr_desc"
+
+        // NEW: conf_status key for shared prefs
+        private const val KEY_CONF_STATUS = "conf_status"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -251,6 +259,12 @@ class MainActivity : AppCompatActivity() {
                         val la = user?.la ?: 0.0
                         val lo = user?.lo ?: 0.0
 
+                        // persist conf_status into prefs so LocationForegroundService can read it
+                        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        prefs.edit {
+                            putInt(KEY_CONF_STATUS, confStatusInt)
+                        }
+
                         withContext(Dispatchers.Main) {
                             // UI updates only on main thread
                             valueLatitude.text = String.format(Locale.getDefault(), "%.6f", la)
@@ -298,8 +312,8 @@ class MainActivity : AppCompatActivity() {
         )
         map.entries.removeIf { it.value == null }
 
-        RetrofitClient.apiService.updateData(map).enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+        RetrofitClient.apiService.updateData(map).enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 confResetInProgress = false
                 if (response.isSuccessful) {
                     Log.d(tag, "resetConfStatusToZeroOnServer: success")
@@ -307,18 +321,31 @@ class MainActivity : AppCompatActivity() {
                         indicatorKonfirmasi.visibility = View.VISIBLE
                         indicatorKonfirmasi.isSelected = false
                     }
+                    // update local pref as well
+                    val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                    prefs.edit {
+                        putInt(KEY_CONF_STATUS, 0)
+                    }
                 } else {
                     Log.e(tag, "resetConfStatusToZeroOnServer: failed code=${response.code()}")
                 }
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
                 confResetInProgress = false
                 Log.e(tag, "resetConfStatusToZeroOnServer onFailure: ${t.message}", t)
             }
         })
     }
 
+    /**
+     * Mengirim emr ke server.
+     * Perubahan penting: setelah berhasil mengirim emr=1 dengan emr_desc, kita menyimpan flag
+     * emr_active di SharedPreferences supaya LocationForegroundService hanya mengirim emr=1
+     * pada heartbeat (tanpa emr_desc atau conf_status). Kita juga set conf_status local ke 0.
+     *
+     * Saat emrValue == 0 -> hapus flag emr_active (server akan otomatis set conf_status = 0 sesuai rule server).
+     */
     private fun sendEmergency(emrValue: Int, emrDesc: String?) {
         if (username.isBlank()) {
             Toast.makeText(this, "Username tidak tersedia", Toast.LENGTH_SHORT).show()
@@ -334,13 +361,28 @@ class MainActivity : AppCompatActivity() {
         }
         map.entries.removeIf { it.value == null }
 
-        RetrofitClient.apiService.updateData(map).enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+        RetrofitClient.apiService.updateData(map).enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
+                    val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                     if (emrValue == 1) {
+                        // set prefs flag so LocationForegroundService will add emr=1 on heartbeats
+                        prefs.edit {
+                            putBoolean(KEY_EMR_ACTIVE, true)
+                            putInt(KEY_CONF_STATUS, 0) // emergency sent, not yet confirmed
+                            if (!emrDesc.isNullOrBlank()) putString(KEY_LAST_EMR_DESC, emrDesc)
+                        }
+
                         Toast.makeText(this@MainActivity, getString(R.string.emergency_sent), Toast.LENGTH_SHORT).show()
                         ensureLocationPermissionsAndStartServiceIfNeeded()
                     } else {
+                        // cancel emergency -> clear flag, server will set conf_status = 0 automatically
+                        prefs.edit {
+                            putBoolean(KEY_EMR_ACTIVE, false)
+                            putInt(KEY_CONF_STATUS, 0)
+                            remove(KEY_LAST_EMR_DESC)
+                        }
+
                         Toast.makeText(this@MainActivity, getString(R.string.emergency_cancelled_toast), Toast.LENGTH_SHORT).show()
                         stopLocationServiceIfRunning()
                     }
@@ -350,7 +392,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
                 Log.e(tag, "sendEmergency onFailure: ${t.message}", t)
                 Toast.makeText(this@MainActivity, getString(R.string.emergency_failed_network), Toast.LENGTH_SHORT).show()
             }

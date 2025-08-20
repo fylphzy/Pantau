@@ -2,19 +2,19 @@ package com.fylphzy.pantau
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.first
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.util.Log
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,11 +29,13 @@ class LoginActivity : AppCompatActivity() {
         usernameEditText = findViewById(R.id.username)
         loginButton = findViewById(R.id.loginBtn)
 
+        // cek login tersimpan. first() dipanggil di coroutine; import kotlinx.coroutines.flow.first diperlukan.
         lifecycleScope.launch {
             val logged = DataStoreManager.isLoggedInFlow(applicationContext).first()
             if (logged) {
-                val savedUser = DataStoreManager.usernameFlow(applicationContext).first()
+                val savedUser: String? = DataStoreManager.usernameFlow(applicationContext).first()
                 if (!savedUser.isNullOrBlank()) {
+                    // pastikan savedUser adalah String (nullable diterima oleh putExtra)
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java).apply {
                         putExtra("username", savedUser)
                     })
@@ -58,10 +60,13 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
                     val apiResponse = response.body()
-                    val list: List<UserResponse> = apiResponse?.data ?: emptyList()
-                    val found = list.any { user -> user.username == inputUsername }
+                    val list = apiResponse?.data ?: emptyList()
+                    val found = list.any { it.username == inputUsername }
 
-                    if (apiResponse?.status == "success" && found) {
+                    val statusOk = apiResponse?.status?.equals("ok", true) == true ||
+                            apiResponse?.status?.equals("success", true) == true
+
+                    if (statusOk && found) {
                         lifecycleScope.launch(Dispatchers.IO) {
                             DataStoreManager.saveLogin(applicationContext, inputUsername)
                             withContext(Dispatchers.Main) {

@@ -3,4 +3,5 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">gpsangkutan.kir.my.id</domain>
     </domain-config>
+    <base-config cleartextTrafficPermitted="false" />
 </network-security-config>
